@@ -7,6 +7,10 @@ Gem::Specification.new do |s|
                     'extension dependencies.'
   s.authors     = ['Rei Kagetsuki']
   s.email       = 'zero@genshin.org'
-  s.files       = ['gear.gemspec']
+  s.files       = ['gear.gemspec'] +
+                  Dir.glob("lib")
+  s.require_path = 'lib'
   s.homepage    = 'https://github.com/Kagetsuki/gear'
+
+  s.add_dependency 'git'
 end
