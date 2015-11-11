@@ -2,7 +2,7 @@ require "gear"
 
 module Gears
   class SWIG < Gear
-    @name = 'SWIG'
+    @gear_name = "SWIG"
 
     def obtain()
       github_obtain('swig', 'swig')

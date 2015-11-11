@@ -8,18 +8,27 @@ class Gear
   # installed: tracking flag indicating if installation/vendorization completed
   # checked: tracking flag indicating if an installation check succeeded
   #
-  attr_reader :name, :obtained, :built, :installed, :checked, :install_path,
-    :headers, :libs
+  attr_reader :obtained, :built, :installed, :checked,
+    :headers, :libs, :build_path
 
-  @@gear_install_target = './vendor'
+  @@install_path = './vendor'
+
+
+  class << self
+    attr_accessor :gear_name
+  end
 
   # define the default name
   # *OVERRIDE* with the name of the Gear/repo/project
-  @name = 'Gear'
+  @gear_name = 'Gear'
 
-  def initializer(install_path = nil)
-    @install_path = install_path || @@gear_install_target
+  def name()
+    self.class.gear_name
+  end
+
+  def initialize()
     @obtained = @built = @installed = @checked = false
+    @build_path = _root_dir() + "/build/#{name()}"
   end
 
   def obtain()
@@ -47,7 +56,7 @@ class Gear
   end
 
   def clean()
-    FileUtils.
+    FileUtils.rm_rf
   end
 
   def engage()
@@ -78,5 +87,9 @@ class Gear
   def github_obtain(user, repository, branch = 'master')
     git_obtain("https://github.com/#{user}/#{repository}.git", branch)
   end
-end
 
+  private
+  def _root_dir()
+    File.expand_path('../..', __FILE__)
+  end
+end
