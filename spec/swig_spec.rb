@@ -20,9 +20,23 @@ describe Gears::SWIG do
   end
 
   it 'installs (vendorizes) SWIG' do
+    expect(swig.install).to eq(true)
+    expect(swig.installed).to eq(true)
   end
 
   it 'checks SWIG was installed and is usable' do
+    expect(swig.check).to eq(true)
+    expect(swig.checked).to eq(true)
+  end
+
+  it 'uninstalls SWIG' do
+    expect(swig.uninstall).to eq(true)
+    expect(swig.installed).to eq(false)
+  end
+
+  it 'removes the SWIG repository from the build directory' do
+    expect(swig.remove).to eq(true)
+    expect(swig.obtained).to eq(false)
   end
 end
 

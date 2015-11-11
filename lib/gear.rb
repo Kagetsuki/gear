@@ -72,13 +72,14 @@ class Gear
   end
 
   def remove()
-    #FileUtils.rm_rf
+    FileUtils.rm_rf("#{@build_path}")
     @obtained = false
     return true
   end
 
   def uninstall()
     # set @installed to false on a succesfully uninstall
+    STDERR.puts "WARNING: Gear did not override uninstall method."
     return false
   end
 

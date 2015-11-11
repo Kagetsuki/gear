@@ -20,7 +20,7 @@ module Gears
     def build()
       Dir.chdir(@build_path)
       `sh autogen.sh`
-      `sh configure --prefix#{@@install_path}`
+      `sh configure --prefix=#{@@install_path}`
       `make`
       @built = true
       return true
@@ -28,6 +28,14 @@ module Gears
 
     def install()
       std_make_install
+    end
+
+    def uninstall()
+      FileUtils.rm("#{@@install_path}/bin/swig")
+      FileUtils.rm("#{@@install_path}/bin/ccache-swig")
+      FileUtils.rm_rf("#{@@install_path}/share/swig")
+      @installed = false
+      return true
     end
   end
 end
