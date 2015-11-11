@@ -1,5 +1,6 @@
 *.swp
 Gemfile.lock
 tmp/
-vendor/
+vendor/*
+build/*
 *.gem

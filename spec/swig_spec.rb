@@ -5,6 +5,10 @@ describe Gears::SWIG do
   
   swig = Gears::SWIG.new
 
+  it 'defaults to the name SWIG' do
+    expect(swig.name).to eq('SWIG')
+  end
+
   it 'obtains SWIG sources from github' do
     expect(swig.obtain).to eq(true)
     expect(swig.obtained).to eq(true)
