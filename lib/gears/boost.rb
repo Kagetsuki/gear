@@ -1,28 +1,19 @@
 require "gear"
 
 module Gears
-  class SWIG < Gear
-    @gear_name = "SWIG"
-
-    def check()
-      gear_exec 'swig -version'
-      if $?.exitstatus == 0
-        @checked = true
-        return true
-      end
-      @checked = false
-      return false
-    end
+  class Boost < Gear
+    @gear_name = "Boost"
 
     def obtain()
-      github_obtain('swig', 'swig')
+      github_obtain('boostorg', 'boost')
     end
 
     def build()
       Dir.chdir(@build_path)
-      `sh autogen.sh`
-      `sh configure --prefix=#{@@install_path}`
-      `make`
+      `sh bootstrap.sh --without-libraries=python --prefix=#{@@install_path}`
+      `sh b2 headers`
+      `sh b2`
+      `sh b2 install --prefix=#{@@install_path}`
       @built = true
       return true
     end

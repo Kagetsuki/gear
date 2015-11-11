@@ -107,6 +107,9 @@ class Gear
     @git.checkout(branch)
     @git.pull
 
+    Dir.chdir(@build_path)
+    `git submodule update --init --recursive`
+
     @obtained = true
     return true
   end
@@ -126,6 +129,11 @@ class Gear
     `make install`
     @installed = true
     return true
+  end
+
+  # Prefixes a command with the gearbox prefixed in the load path
+  def gear_exec(command = "")
+    `LD_LIBRARY_PATH=#{@@install_path}/lib:$LD_LIBRARY_PATH C_INCLUDE_PATH=#{@@install_path}/include:$C_INCLUDE_PATH PATH=#{@@install_path}/bin:$PATH #{command}`
   end
 
   private

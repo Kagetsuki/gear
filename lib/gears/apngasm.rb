@@ -15,8 +15,8 @@ module Gears
       Dir.chdir(@build_path)
       `mkdir build`
       `cd build`
-      `cmake -DCMAKE_INSTALL_PREFIX:PATH=#{@@install_path} ..`
-      `make`
+      gear_exec 'cmake -DCMAKE_INSTALL_PREFIX:PATH=#{@@install_path} ..'
+      gear_exec 'make'
       @built = true
       return true
     end
