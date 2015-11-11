@@ -5,6 +5,13 @@ module Gears
     @gear_name = "APNGAsm"
 
     def check()
+      gear_exec 'ldconfig -p | grep libapngasm'
+      if $?.exitstatus == 0
+        @checked = true
+        return true
+      end
+      @checked = false
+      return false
     end
 
     def obtain()
@@ -24,5 +31,7 @@ module Gears
     def install()
       std_make_install
     end
+
+    #TODO uninstall
   end
 end

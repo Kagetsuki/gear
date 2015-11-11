@@ -4,6 +4,16 @@ module Gears
   class Boost < Gear
     @gear_name = "Boost"
 
+    def check()
+      gear_exec 'ldconfig -p | grep libboost'
+      if $?.exitstatus == 0
+        @checked = true
+        return true
+      end
+      @checked = false
+      return false
+    end
+
     def obtain()
       github_obtain('boostorg', 'boost')
     end
@@ -23,11 +33,7 @@ module Gears
     end
 
     def uninstall()
-      FileUtils.rm("#{@@install_path}/bin/swig")
-      FileUtils.rm("#{@@install_path}/bin/ccache-swig")
-      FileUtils.rm_rf("#{@@install_path}/share/swig")
-      @installed = false
-      return true
+      #TODO
     end
   end
 end
