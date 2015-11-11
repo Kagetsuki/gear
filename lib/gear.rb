@@ -63,17 +63,28 @@ class Gear
     return false
   end
 
-  def clean()
-    FileUtils.rm_rf
-  end
-
   def engage()
     !check && # bail if already installed
     obtain &
     build &&
     install &&
-    check &&
-    clean
+    check
+  end
+
+  def remove()
+    #FileUtils.rm_rf
+    @obtained = false
+    return true
+  end
+
+  def uninstall()
+    # set @installed to false on a succesfully uninstall
+    return false
+  end
+
+  def disengage()
+    uninstall &&
+    remove
   end
 
   #======== obtain helpers ========#
@@ -106,8 +117,14 @@ class Gear
   def std_config_make(flags = "")
     Dir.chdir(@build_path)
     `autoconf` if !File.exist? 'configure'
-    `./confirgure`
+    `./confirgure --prefix#{@@install_path}`
     `make`
+  end
+
+  def std_make_install()
+    `make install`
+    @installed = true
+    return true
   end
 
   private

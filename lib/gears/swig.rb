@@ -4,6 +4,15 @@ module Gears
   class SWIG < Gear
     @gear_name = "SWIG"
 
+    def check()
+      if system('swig -version')
+        @checked = true
+        return true
+      end
+      @checked = false
+      return false
+    end
+
     def obtain()
       github_obtain('swig', 'swig')
     end
@@ -13,8 +22,13 @@ module Gears
       `sh autogen.sh`
       `sh configure --prefix#{@@install_path}`
       `make`
+      @built = true
+      return true
     end
 
+    def install()
+      std_make_install
+    end
   end
 end
 
