@@ -13,6 +13,7 @@ class Gear
     :headers, :libs, :build_path
 
   @@install_path = "#{Dir.pwd}/vendor"
+  @@initialized = false
 
   @headers = []
   @libs = []
@@ -37,6 +38,9 @@ class Gear
   def initialize()
     @obtained = @built = @installed = @checked = false
     @build_path = _root_dir() + "/build/#{name()}"
+    _setup_paths()
+
+    @@initialized = true
   end
 
   def obtain()
@@ -139,5 +143,18 @@ class Gear
   private
   def _root_dir()
     File.expand_path('../..', __FILE__)
+  end
+
+  # sets up vendor/sub directories
+  def _setup_paths()
+    #puts "⚙Preparing directory structure in #{@@install_path}"
+    return if @@initialized
+    FileUtils.mkdir_p("#{@@install_path}/bin")
+    FileUtils.mkdir_p("#{@@install_path}/include")
+    FileUtils.mkdir_p("#{@@install_path}/lib")
+
+    ENV['PATH'] = ENV['PATH'] + "#{@@install_path}/bin"
+    ENV['PATH'] = ENV['PATH'] + "#{@@install_path}/bin"
+    ENV['LD_LIBRARY_PATH'] = ENV['LD_LIBRARY_PATH'] + "#{@@install_path}/lib"
   end
 end

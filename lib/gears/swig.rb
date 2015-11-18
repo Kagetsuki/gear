@@ -32,8 +32,8 @@ module Gears
     end
 
     def uninstall()
-      FileUtils.rm("#{@@install_path}/bin/swig")
-      FileUtils.rm("#{@@install_path}/bin/ccache-swig")
+      FileUtils.rm_f("#{@@install_path}/bin/swig")
+      FileUtils.rm_f("#{@@install_path}/bin/ccache-swig")
       FileUtils.rm_rf("#{@@install_path}/share/swig")
       @installed = false
       return true
