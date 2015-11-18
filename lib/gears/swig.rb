@@ -35,6 +35,7 @@ module Gears
       FileUtils.rm_f("#{@@install_path}/bin/swig")
       FileUtils.rm_f("#{@@install_path}/bin/ccache-swig")
       FileUtils.rm_rf("#{@@install_path}/share/swig")
+      FileUtils.rm_f("#{@@install_path}/share/man/man1/ccache-swig.1")
       @installed = false
       return true
     end

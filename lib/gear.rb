@@ -22,6 +22,15 @@ class Gear
     attr_accessor :gear_name
   end
 
+  def self.install_path(new_path = nil)
+    @@install_path = new_path unless new_path.nil?
+    @@install_path
+  end
+
+  def self.initialized?
+    @@initialized
+  end
+
   # define the default name
   # *OVERRIDE* with the name of the Gear/repo/project
   @gear_name = 'Gear'
@@ -153,8 +162,13 @@ class Gear
     FileUtils.mkdir_p("#{@@install_path}/include")
     FileUtils.mkdir_p("#{@@install_path}/lib")
 
-    ENV['PATH'] = ENV['PATH'] + "#{@@install_path}/bin"
-    ENV['PATH'] = ENV['PATH'] + "#{@@install_path}/bin"
-    ENV['LD_LIBRARY_PATH'] = ENV['LD_LIBRARY_PATH'] + "#{@@install_path}/lib"
+    ENV['PATH'] = (ENV['PATH'].nil? ?
+      "#{@@install_path}/bin" : ENV['PATH'] + ":#{@@install_path}/bin")
+    #ENV['C_INCLUDE_PATH'] = ENV['C_INCLUDE_PATH'].to_s + ":#{@@install_path}/include"
+    #ENV['CPLUS_INCLUDE_PATH'] = ENV['CPLUS_INCLUDE_PATH'].to_s + ":#{@@install_path}/include"
+    ENV['CPATH'] = (ENV['CPATH'].nil? ?
+      "#{@@install_path}/include" : ENV['CPATH'] + ":#{@@install_path}/include")
+    ENV['LD_LIBRARY_PATH'] = (ENV['LD_LIBRARY_PATH'].nil? ?
+      "#{@@install_path}/lib" : ENV['LD_LIBRARY_PATH'] + ":#{@@install_path}/lib")
   end
 end

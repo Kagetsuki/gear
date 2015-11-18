@@ -20,8 +20,8 @@ module Gears
 
     def build()
       Dir.chdir(@build_path)
-      `mkdir build`
-      `cd build`
+      FileUtils.mkdir_p('build') # `mkdir build`
+      Dir.chdir('build') # `cd build`
       gear_exec 'cmake -DCMAKE_INSTALL_PREFIX:PATH=#{@@install_path} ..'
       gear_exec 'make'
       @built = true
