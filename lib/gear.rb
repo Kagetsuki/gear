@@ -111,7 +111,7 @@ class Gear
       else
         @git = Git.clone(repository, build_path)
       end
-    rescue e
+    rescue StandardError => e 
       STDERR.puts "Could not obtain repository #{repository}.\n#{e}"
       @obtained = false
       return false
