@@ -20,10 +20,10 @@ module Gears
 
     def build()
       Dir.chdir(@build_path)
-      `sh bootstrap.sh --without-libraries=python --prefix=#{@@install_path}`
-      `sh b2 headers`
-      `sh b2`
-      `sh b2 install --prefix=#{@@install_path}`
+      `./bootstrap.sh --without-libraries=python --prefix=#{@@install_path}`
+      `./b2 headers`
+      `./b2`
+      `./b2 install --prefix=#{@@install_path}`
       @built = true
       return true
     end
