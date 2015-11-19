@@ -1,4 +1,6 @@
-require "gear"
+require 'gear'
+
+require 'gears/libarchive'
 
 module Gears
   class CMake < Gear
@@ -19,6 +21,9 @@ module Gears
     end
 
     def build()
+      la = Gears::LibArchive.new
+      la.engage
+
       Dir.chdir(@build_path)
       `sh bootstrap --prefix=#{@@install_path}`
       `make`

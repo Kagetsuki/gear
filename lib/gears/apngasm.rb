@@ -1,4 +1,7 @@
-require "gear"
+require 'gear'
+
+require 'gears/boost'
+require 'gears/cmake'
 
 module Gears
   class APNGAsm < Gear
@@ -19,6 +22,12 @@ module Gears
     end
 
     def build()
+      # prerequisites
+      cm = Gears::CMake.new
+      cm.engage
+      boost = Gears::Boost.new
+      boost.engage
+
       Dir.chdir(@build_path)
       FileUtils.mkdir_p('build') # `mkdir build`
       Dir.chdir('build') # `cd build`
