@@ -5,13 +5,13 @@ module Gears
     @gear_name = "Boost"
 
     def check()
-      gear_exec 'ldconfig -p | grep libboost'
-      if $?.exitstatus == 0
-        @checked = true
-        return true
+      if RUBY_PLATFORM.match(/darwin/)
+        @checked = gear_exec_mac > 0 ? true : false
+      else
+        gear_exec 'ldconfig -p | grep libboost'
+        @checked = $?.exitstatus == 0 ? true : false
       end
-      @checked = false
-      return false
+      return @checked
     end
 
     def obtain()

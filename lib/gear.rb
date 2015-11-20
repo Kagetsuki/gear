@@ -149,6 +149,10 @@ class Gear
     `LD_LIBRARY_PATH=#{@@install_path}/lib:$LD_LIBRARY_PATH C_INCLUDE_PATH=#{@@install_path}/include:$C_INCLUDE_PATH PATH=#{@@install_path}/bin:$PATH #{command}`
   end
 
+  def gear_exec_mac()
+    `mdfind -onlyin #{@@install_path} -name #{name} -count`.chomp.to_i
+  end
+
   private
   def _root_dir()
     File.expand_path('../..', __FILE__)

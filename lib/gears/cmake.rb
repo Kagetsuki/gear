@@ -7,13 +7,13 @@ module Gears
     @gear_name = "CMake"
 
     def check()
-      gear_exec 'cmake --version'
-      if $?.exitstatus == 0
-        @checked = true
-        return true
+      if RUBY_PLATFORM.match(/darwin/)
+        @checked = gear_exec_mac > 0 ? true : false
+      else
+        gear_exec 'cmake --version'
+        @checked = $?.exitstatus == 0 ? true : false
       end
-      @checked = false
-      return false
+      return @checked
     end
 
     def obtain()

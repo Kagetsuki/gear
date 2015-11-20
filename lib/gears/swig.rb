@@ -5,13 +5,13 @@ module Gears
     @gear_name = "SWIG"
 
     def check()
-      gear_exec 'swig -version'
-      if $?.exitstatus == 0
-        @checked = true
-        return true
+      if RUBY_PLATFORM.match(/darwin/)
+        @checked = gear_exec_mac > 0 ? true : false
+      else
+        gear_exec 'swig -version'
+        @checked = $?.exitstatus == 0 ? true : false
       end
-      @checked = false
-      return false
+      return @checked
     end
 
     def obtain()

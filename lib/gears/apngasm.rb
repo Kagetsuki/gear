@@ -8,13 +8,13 @@ module Gears
     @gear_name = "APNGAsm"
 
     def check()
-      gear_exec 'ldconfig -p | grep libapngasm'
-      if $?.exitstatus == 0
-        @checked = true
-        return true
+      if RUBY_PLATFORM.match(/darwin/)
+        @checked = gear_exec_mac > 0 ? true : false
+      else
+        gear_exec 'ldconfig -p | grep libapngasm'
+        @checked = $?.exitstatus == 0 ? true : false
       end
-      @checked = false
-      return false
+      return @checked
     end
 
     def obtain()
