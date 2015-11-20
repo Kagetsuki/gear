@@ -28,7 +28,9 @@ module Gears
     end
 
     def install()
-      std_make_install
+      Dir.chdir(@build_path)
+      `make install-main`
+      `make install-lib`
     end
 
     def uninstall()
