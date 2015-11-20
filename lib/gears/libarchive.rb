@@ -15,12 +15,13 @@ module Gears
     end
 
     def obtain()
-      github_obtain('libarchive', 'libarchive')
+      github_obtain('libarchive', 'libarchive', 'release')
     end
 
     def build()
+      # TODO: fix build error
       Dir.chdir(@build_path)
-      `sh build/autogen.sh`
+      `build/autogen.sh`
       `./configure --prefix=#{@@install_path}`
       `make`
       @built = true
