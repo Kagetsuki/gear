@@ -48,6 +48,7 @@ class Gear
     @obtained = @built = @installed = @checked = false
     @build_path = _root_dir() + "/build/#{name()}"
     _setup_paths()
+    Dir.chdir(_root_dir() + "/build")
 
     @@initialized = true
   end
