@@ -5,6 +5,7 @@ module Gears
     @gear_name = "libarchive"
 
     def check()
+      puts 'Checking for libarchive'
       if RUBY_PLATFORM.match(/darwin/)
         @checked = gear_exec_mac > 0 ? true : false
       else
@@ -15,15 +16,23 @@ module Gears
     end
 
     def obtain()
-      github_obtain('libarchive', 'libarchive', 'release')
+      puts 'Obtaining libarchive'
+      # github_obtain('libarchive', 'libarchive', 'release')
+      Dir.chdir(_root_path + '/build')
+      `wget http://www.libarchive.org/downloads/libarchive-3.1.2.zip`
+      `unzip libarchive-3.1.2.zip`
+      `mv libarchive-3.1.2 libarchive`
     end
 
     def build()
+      puts "Building libarchive in #{@build_path}"
       # TODO: fix build error
       Dir.chdir(@build_path)
-      `git checkout release`
-      `build/autogen.sh`
+      # `git checkout release`
+      # `sh build/autogen.sh`
+      puts '...configuring'
       `./configure --prefix=#{@@install_path} --without-lzo2 --without-nettle --without-xml2`
+      puts '...making'
       `make`
       @built = true
       true

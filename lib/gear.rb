@@ -86,6 +86,7 @@ class Gear
   end
 
   def remove()
+    Dir.chdir(_root_path + '/build')
     FileUtils.rm_rf("#{@build_path}")
     @obtained = false
     return true

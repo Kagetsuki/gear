@@ -34,6 +34,7 @@ module Gears
 
       puts "Building APNGAsm in #{@build_path}"
       Dir.chdir(@build_path)
+      `git checkout swig_interfaces`
       FileUtils.mkdir_p('build') # `mkdir build`
       Dir.chdir('build') # `cd build`
       gear_exec 'cmake -DCMAKE_INSTALL_PREFIX:PATH=#{@@install_path} ..'
