@@ -46,9 +46,9 @@ class Gear
 
   def initialize()
     @obtained = @built = @installed = @checked = false
-    @build_path = _root_dir() + "/build/#{name()}"
+    @build_path = _root_path() + "/build/#{name()}"
     _setup_paths()
-    Dir.chdir(_root_dir() + "/build")
+    Dir.chdir(_root_path() + "/build")
 
     @@initialized = true
   end
@@ -155,7 +155,7 @@ class Gear
   end
 
   private
-  def _root_dir()
+  def _root_path()
     File.expand_path('../..', __FILE__)
   end
 
@@ -163,6 +163,8 @@ class Gear
   def _setup_paths()
     #puts "⚙Preparing directory structure in #{@@install_path}"
     return if @@initialized
+
+    FileUtils.mkdir_p("#{_root_path}/build")
     FileUtils.mkdir_p("#{@@install_path}/bin")
     FileUtils.mkdir_p("#{@@install_path}/include")
     FileUtils.mkdir_p("#{@@install_path}/lib")
