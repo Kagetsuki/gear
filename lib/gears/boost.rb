@@ -5,6 +5,7 @@ module Gears
     @gear_name = "Boost"
 
     def check()
+      puts 'Checking for Boost'
       if RUBY_PLATFORM.match(/darwin/)
         @checked = gear_exec_mac > 0 ? true : false
       else
@@ -15,6 +16,7 @@ module Gears
     end
 
     def obtain()
+      puts 'Obtaining Boost'
       # github_obtain('boostorg', 'boost')
       Dir.chdir(_root_path + '/build')
       return true if Dir.exist? 'Boost'
@@ -27,10 +29,15 @@ module Gears
     end
 
     def build()
+      puts "Building Boost in #{@build_path}"
       Dir.chdir(@build_path)
+      puts '...boostrapping'
       `./bootstrap.sh --without-libraries=python --prefix=#{@@install_path}`
+      puts '...compiling headers'
       `./b2 headers`
+      puts '...building'
       `./b2`
+      
       `./b2 install --prefix=#{@@install_path}`
       @built = true
       return true

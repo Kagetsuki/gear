@@ -8,6 +8,7 @@ module Gears
     @gear_name = "APNGAsm"
 
     def check()
+      puts 'Checking for APNGAsm libraries'
       if RUBY_PLATFORM.match(/darwin/)
         @checked = gear_exec_mac > 0 ? true : false
       else
@@ -18,16 +19,20 @@ module Gears
     end
 
     def obtain()
+      puts 'Obtaining APNGAsm sources'
       github_obtain('apngasm', 'apngasm')
     end
 
     def build()
-      # prerequisites
+      puts 'Engaging APNGAsm dependencies'
       cm = Gears::CMake.new
-      cm.engage
+      cm_run = Thread.new { cm.engage }
       boost = Gears::Boost.new
-      boost.engage
+      boost_run = Thread.new { boost.engage }
+      cm_run.join
+      boost_run.join
 
+      puts "Building APNGAsm in #{@build_path}"
       Dir.chdir(@build_path)
       FileUtils.mkdir_p('build') # `mkdir build`
       Dir.chdir('build') # `cd build`
@@ -38,6 +43,7 @@ module Gears
     end
 
     def install()
+      puts "Installing APNGAsm to #{@@install_path}"
       std_make_install
     end
 

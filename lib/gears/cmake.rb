@@ -7,6 +7,7 @@ module Gears
     @gear_name = "CMake"
 
     def check()
+      puts 'Checking for CMake'
       if RUBY_PLATFORM.match(/darwin/)
         @checked = gear_exec_mac > 0 ? true : false
       else
@@ -17,13 +18,16 @@ module Gears
     end
 
     def obtain()
+      puts 'Obtaining CMake'
       github_obtain('Kitware', 'CMake')
     end
 
     def build()
+      puts 'Engaging CMake dependencies'
       la = Gears::LibArchive.new
       la.engage
 
+      puts "Building CMake in #{@build_path}"
       Dir.chdir(@build_path)
       `sh bootstrap --prefix=#{@@install_path}`
       `make`
@@ -32,10 +36,12 @@ module Gears
     end
 
     def install()
+      puts "Installing CMake to #{@@install_path}"
       std_make_install
     end
 
     def uninstall()
+      puts 'Uninstalling CMake'
       FileUtils.rm_f("#{@@install_path}/bin/ccmake")
       FileUtils.rm_f("#{@@install_path}/bin/cmake")
       FileUtils.rm_f("#{@@install_path}/bin/cmakexbuild")
