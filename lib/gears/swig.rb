@@ -35,6 +35,7 @@ module Gears
       Dir.chdir(@build_path)
       `make install-main`
       `make install-lib`
+      @installed = true
       true
     end
 

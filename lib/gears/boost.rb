@@ -37,7 +37,6 @@ module Gears
       `./b2 headers`
       puts '...building'
       `./b2`
-      
       @built = true
       return true
     end
@@ -46,12 +45,14 @@ module Gears
       puts "Installing Boost to #{@@install_path}"
       Dir.chdir(@build_path)
       `./b2 install --prefix=#{@@install_path}`
+      @installed = true
       true
     end
 
     def uninstall()
       FileUtils.rm_f(Dir.glob("#{@@install_path}/lib/libboost.*"))
       FileUtils.rm_rf("#{@@install_path}/include/boost")
+      @installed = false
       true
     end
   end
