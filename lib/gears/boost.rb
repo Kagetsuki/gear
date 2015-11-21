@@ -19,6 +19,7 @@ module Gears
       `wget http://downloads.sourceforge.net/project/boost/boost/1.59.0/boost_1_59_0.zip`
       `unzip boost_1_59_0.zip`
       `mv boost_1_59_0 Boost`
+      true
     end
 
     def build()

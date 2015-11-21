@@ -21,6 +21,7 @@ module Gears
     def build()
       # TODO: fix build error
       Dir.chdir(@build_path)
+      `git checkout release`
       `build/autogen.sh`
       `./configure --prefix=#{@@install_path}`
       `make`
