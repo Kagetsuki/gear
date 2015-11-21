@@ -11,4 +11,4 @@ rvm:
   - jruby-head
 
 script:
-  - bundle exec rspec
+  - travis_wait 60 bundle exec rspec
