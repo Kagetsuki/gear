@@ -23,7 +23,7 @@ module Gears
       Dir.chdir(@build_path)
       `git checkout release`
       `build/autogen.sh`
-      `./configure --prefix=#{@@install_path}`
+      `./configure --prefix=#{@@install_path} --without-lzo2 --without-nettle --without-xml2`
       `make`
       @built = true
       return true

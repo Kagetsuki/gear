@@ -104,6 +104,7 @@ class Gear
 
   #======== obtain helpers ========#
   def git_obtain(repository, branch)
+    Dir.chdir(_root_path + '/build')
     begin
       if Dir.exist? build_path
         @git = Git.open(build_path)
@@ -140,6 +141,7 @@ class Gear
   end
 
   def std_make_install()
+    Dir.chdir(@build_path)
     `make install`
     @installed = true
     return true
