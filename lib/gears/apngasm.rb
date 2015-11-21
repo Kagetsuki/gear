@@ -37,8 +37,9 @@ module Gears
       `git checkout swig_interfaces`
       FileUtils.mkdir_p('build') # `mkdir build`
       Dir.chdir('build') # `cd build`
-      gear_exec 'cmake -DCMAKE_INSTALL_PREFIX:PATH=#{@@install_path} ..'
-      gear_exec 'make'
+      puts "cmake -DCMAKE_INSTALL_PREFIX=#{@@install_path} .."
+      `cmake -DCMAKE_INSTALL_PREFIX=#{@@install_path} ..`
+      `make`
       @built = true
       true
     end
