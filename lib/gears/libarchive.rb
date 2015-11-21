@@ -11,7 +11,7 @@ module Gears
         gear_exec 'ldconfig -p | grep libarchive'
         @checked = $?.exitstatus == 0 ? true : false
       end
-      return @checked
+      @checked
     end
 
     def obtain()
@@ -26,7 +26,7 @@ module Gears
       `./configure --prefix=#{@@install_path} --without-lzo2 --without-nettle --without-xml2`
       `make`
       @built = true
-      return true
+      true
     end
 
     def install()
@@ -47,7 +47,7 @@ module Gears
       FileUtils.rm_rf("#{@@install_path}/share/man/man3")
       FileUtils.rm_rf("#{@@install_path}/share/man/man5")
       @installed = false
-      return true
+      true
     end
   end
 end

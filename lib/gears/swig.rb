@@ -12,7 +12,7 @@ module Gears
         gear_exec 'swig -version'
         @checked = $?.exitstatus == 0 ? true : false
       end
-      return @checked
+      @checked
     end
 
     def obtain()
@@ -27,7 +27,7 @@ module Gears
       `sh configure --prefix=#{@@install_path}`
       `make`
       @built = true
-      return true
+      true
     end
 
     def install()
@@ -45,7 +45,7 @@ module Gears
       FileUtils.rm_rf("#{@@install_path}/share/swig")
       FileUtils.rm_f("#{@@install_path}/share/man/man1/ccache-swig.1")
       @installed = false
-      return true
+      true
     end
   end
 end

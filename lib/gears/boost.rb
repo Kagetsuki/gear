@@ -12,7 +12,7 @@ module Gears
         gear_exec 'ldconfig -p | grep libboost'
         @checked = $?.exitstatus == 0 ? true : false
       end
-      return @checked
+      @checked
     end
 
     def obtain()
@@ -38,17 +38,21 @@ module Gears
       puts '...building'
       `./b2`
       
-      `./b2 install --prefix=#{@@install_path}`
       @built = true
       return true
     end
 
     def install()
-      std_make_install
+      puts "Installing Boost to #{@@install_path}"
+      Dir.chdir(@build_path)
+      `./b2 install --prefix=#{@@install_path}`
+      true
     end
 
     def uninstall()
-      #TODO
+      FileUtils.rm_f(Dir.glob("#{@@install_path}/lib/libboost.*"))
+      FileUtils.rm_rf("#{@@install_path}/include/boost")
+      true
     end
   end
 end

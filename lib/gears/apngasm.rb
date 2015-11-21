@@ -15,7 +15,7 @@ module Gears
         gear_exec 'ldconfig -p | grep libapngasm'
         @checked = $?.exitstatus == 0 ? true : false
       end
-      return @checked
+      @checked
     end
 
     def obtain()
@@ -39,7 +39,7 @@ module Gears
       gear_exec 'cmake -DCMAKE_INSTALL_PREFIX:PATH=#{@@install_path} ..'
       gear_exec 'make'
       @built = true
-      return true
+      true
     end
 
     def install()
