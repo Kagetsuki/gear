@@ -29,7 +29,7 @@ module Gears
 
       puts "Building CMake in #{@build_path}"
       Dir.chdir(@build_path)
-      `sh bootstrap --prefix=#{@@install_path}`
+      `./configure --prefix=#{@@install_path}`
       `make`
       @built = true
       return true

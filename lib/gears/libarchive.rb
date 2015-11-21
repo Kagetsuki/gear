@@ -18,6 +18,7 @@ module Gears
     def obtain()
       puts 'Obtaining libarchive'
       # github_obtain('libarchive', 'libarchive', 'release')
+      return true if File.exist? 'libarchive'
       Dir.chdir(_root_path + '/build')
       `wget http://www.libarchive.org/downloads/libarchive-3.1.2.zip`
       `unzip libarchive-3.1.2.zip`
