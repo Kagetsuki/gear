@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = 'gear'
-  s.version     = '0.0.4'
+  s.version     = '0.0.5'
   s.license     = 'GPL-3'
   s.summary     = 'modular dependency build system for native extensions'
   s.description = 'gear provides a modular framework to encapsulate build tasks for native ' + 
