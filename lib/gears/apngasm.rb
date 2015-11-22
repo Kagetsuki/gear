@@ -46,7 +46,10 @@ module Gears
 
     def install()
       puts "Installing APNGAsm to #{@@install_path}"
-      std_make_install
+      Dir.chdir(@build_path + '/build')
+      `make install`
+      @installed = true
+      true
     end
 
     #TODO uninstall

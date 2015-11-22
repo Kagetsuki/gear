@@ -23,8 +23,8 @@ module Gears
     def build()
       puts "Building SWIG in #{@build_path}"
       Dir.chdir(@build_path)
-      `sh autogen.sh`
-      `sh configure --prefix=#{@@install_path}`
+      `./autogen.sh`
+      `./configure --prefix=#{@@install_path}`
       `make`
       @built = true
       true
