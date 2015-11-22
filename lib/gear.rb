@@ -79,7 +79,7 @@ class Gear
 
   def engage()
     !check && # bail if already installed
-    obtain &
+    obtain &&
     build &&
     install &&
     check
