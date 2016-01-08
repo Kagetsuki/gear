@@ -113,7 +113,8 @@ class Gear
         @git.reset("HEAD", hard: true)
         @git.clean(force: true, d: true, x:true)
       else
-        @git = Git.clone(repository, build_path)
+        `git clone #{repository} #{build_path}`
+        @git = Git.open(build_path)
       end
     rescue StandardError => e 
       STDERR.puts "Could not obtain repository #{repository}.\n#{e}"

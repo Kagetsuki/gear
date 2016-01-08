@@ -21,10 +21,10 @@ module Gears
       Dir.chdir(_root_path + '/build')
       return true if Dir.exist? 'Boost'
 
-      `wget http://downloads.sourceforge.net/project/boost/boost/1.59.0/boost_1_59_0.zip`
-      `unzip boost_1_59_0.zip`
-      `mv boost_1_59_0 Boost`
-      FileUtils.rm('boost_1_59_0.zip')
+      `wget http://downloads.sourceforge.net/project/boost/boost/1.60.0/boost_1_60_0.zip`
+      `unzip boost_1_60_0.zip`
+      `mv boost_1_60_0 Boost`
+      FileUtils.rm('boost_1_60_0.zip')
       true
     end
 
