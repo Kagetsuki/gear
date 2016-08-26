@@ -176,19 +176,19 @@ class Gear
 
     ENV['PATH'] = (ENV['PATH'].nil? ?
       "#{@@install_path}/bin" : ENV['PATH'] + ":#{@@install_path}/bin")
-    `export PATH=#{ENV['PATH']}`
+    `export PATH="#{ENV['PATH']}"`
     #ENV['C_INCLUDE_PATH'] = ENV['C_INCLUDE_PATH'].to_s + ":#{@@install_path}/include"
     #ENV['CPLUS_INCLUDE_PATH'] = ENV['CPLUS_INCLUDE_PATH'].to_s + ":#{@@install_path}/include"
     ENV['CPATH'] = (ENV['CPATH'].nil? ?
       "#{@@install_path}/include" : ENV['CPATH'] + ":#{@@install_path}/include")
-    `export CPATH=#{ENV['CPATH']}`
+    `export CPATH="#{ENV['CPATH']}"`
 
     ENV['LD_LIBRARY_PATH'] = (ENV['LD_LIBRARY_PATH'].nil? ?
       "#{@@install_path}/lib" : ENV['LD_LIBRARY_PATH'] + ":#{@@install_path}/lib")
-    `export LD_LIBRARY_PATH=#{ENV['LD_LIBRARY_PATH']}`
+    `export LD_LIBRARY_PATH="#{ENV['LD_LIBRARY_PATH']}"`
 
     ENV['LIBRARY_PATH'] = (ENV['LIBRARY_PATH'].nil? ?
       "#{@@install_path}/lib" : ENV['LIBRARY_PATH'] + ":#{@@install_path}/lib")
-    `export LIBRARY_PATH=#{ENV['LIBRARY_PATH']}`
+    `export LIBRARY_PATH="#{ENV['LIBRARY_PATH']}"`
   end
 end
