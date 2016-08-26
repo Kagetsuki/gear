@@ -20,10 +20,11 @@ module Gears
     def build()
       puts "Building GObjectIntrospection in #{@build_path}"
       Dir.chdir(@build_path)
-      FileUtils.mkdir_p('build') # `mkdir build`
-      Dir.chdir('build') # `cd build`
-      puts "cmake -DCMAKE_INSTALL_PREFIX=#{@@install_path} .."
-      `cmake -DCMAKE_INSTALL_PREFIX=#{@@install_path} ..`
+      puts './autogen.sh'
+      `./autogen.sh`
+      puts "./configure --prefix=#{@@install_path}"
+      `./configure --prefix=#{@@install_path}`
+      puts 'making...'
       `make`
       @built = true
       true
