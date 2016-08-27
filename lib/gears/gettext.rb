@@ -16,7 +16,7 @@ module Gears
       `wget http://ftp.gnu.org/pub/gnu/gettext/#{name}.tar.gz`
       `tar -zxvf #{name}.tar.gz`
       `rm #{name}.tar.gz`
-      `mv #{name} #{@gear_name}`
+      `mv #{name} Gettext`
     end
 
     def build()
