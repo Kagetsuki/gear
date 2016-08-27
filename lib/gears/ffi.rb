@@ -19,8 +19,8 @@ module Gears
       Dir.chdir(@build_path)
       puts "./autogen.sh"
       `./autogen.sh`
-      puts "./configure --disable-docs --prefix=#{@@install_path}"
-      `"./configure --disable-docs --prefix=#{@@install_path}"`
+      puts "./configure --disable-docs --prefix=#{@@install_path} --includedir=#{@@install_path}/include"
+      `"./configure --disable-docs --prefix=#{@@install_path} --includedir=#{@@install_path}/include`
       puts 'making...'
       `make`
       @built = true
@@ -31,6 +31,7 @@ module Gears
       puts "Installing to #{@@install_path}"
       Dir.chdir(@build_path)
       `make install`
+      `cp -ar #{@@install_path}/lib/libffi-3.99999/include/* #{@@install_path}/include/`
       @installed = true
       true
     end

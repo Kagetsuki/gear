@@ -2,7 +2,7 @@ require 'gear'
 
 module Gears
   class Gettext < Gear
-    @gear_name = "Gettext"
+    @gear_name = "gettext"
 
     def check()
       puts 'Checking for Gettext'
