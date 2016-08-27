@@ -2,7 +2,7 @@ require 'gear'
 
 module Gears
   class Gettext < Gear
-    @gear_name = "gettext"
+    @gear_name = "Gettext"
 
     def check()
       puts 'Checking for Gettext'
@@ -16,7 +16,7 @@ module Gears
       `wget http://ftp.gnu.org/pub/gnu/gettext/#{name}.tar.gz`
       `tar -zxvf #{name}.tar.gz`
       `rm #{name}.tar.gz`
-      `mv #{name} Gettext`
+      `mv #{name} #{@gear_name}`
     end
 
     def build()
