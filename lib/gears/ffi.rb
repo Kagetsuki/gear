@@ -20,7 +20,7 @@ module Gears
       puts "./autogen.sh"
       `./autogen.sh`
       puts "./configure --disable-docs --prefix=#{@@install_path} --includedir=#{@@install_path}/include"
-      `"./configure --disable-docs --prefix=#{@@install_path} --includedir=#{@@install_path}/include`
+      `./configure --disable-docs --prefix=#{@@install_path} --includedir=#{@@install_path}/include`
       puts 'making...'
       `make`
       @built = true
